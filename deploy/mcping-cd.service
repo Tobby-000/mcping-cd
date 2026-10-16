@@ -1,0 +1,17 @@
+[Unit]
+Description=mcping-exporter CD listener
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=deploy
+Group=docker
+EnvironmentFile=/etc/mcping-cd.env
+ExecStart=/usr/local/bin/mcping-cd
+Restart=on-failure
+RestartSec=5s
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
